@@ -58,4 +58,37 @@ const login = async (req, res) => {
     
 }
 
-module.exports = { signup ,login };
+const getusers = async (req, res) => {
+    try{
+        
+        const users = await UserSchema.find({});
+
+        if(!users){
+            return res.status(404).json({ result: [], message: "No users found" });
+        }else{
+            res.status(200).json({ result: users, message: "Users fetched successfully" });
+        }
+        
+    }catch(err){
+        res.status(500).json({ result: [], message: "Something went wrong" });
+    }
+}
+
+const getuser = async (req, res) => {
+    const id = req.body.id;
+    try{
+        
+        const users = await UserSchema.find({_id: id});
+
+        if(!users){
+            return res.status(404).json({ result: [], message: "No users found" });
+        }else{
+            res.status(200).json({ result: users, message: "Users fetched successfully" });
+        }
+        
+    }catch(err){
+        res.status(500).json({ result: [], message: "Something went wrong" });
+    }
+}
+
+module.exports = { signup ,login ,getusers,getuser };
