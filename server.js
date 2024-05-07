@@ -18,7 +18,7 @@ mongoose.set('debug', true);
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Welcome to Render Sanjay!');
 })
 
 app.use('/users', userRouter);
