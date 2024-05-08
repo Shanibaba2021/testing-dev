@@ -59,20 +59,21 @@ const login = async (req, res) => {
 }
 
 const getusers = async (req, res) => {
-    try{
-        
+    try {
         const users = await UserSchema.find({});
 
-        if(!users){
+        if (!users || users.length === 0) {
             return res.status(404).json({ result: [], message: "No users found" });
-        }else{
-            res.status(200).json({ result: users, message: "Users fetched successfully" });
         }
+
+        return res.status(200).json({ result: users, message: "Users fetched successfully" });
         
-    }catch(err){
-        res.status(500).json({ result: [], message: "Something went wrong" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Something went wrong" });
     }
 }
+
 
 const getuser = async (req, res) => {
     const id = req.body.id;
