@@ -10,6 +10,7 @@ const server = http.createServer(app);
 
 // Importing routes
 const userRouter = require('./routes/users');
+const notesRouter = require('./routes/notes');
 
 const uri = process.env.MONGO_URI;
 mongoose.connect(uri, { useNewUrlParser: true });
@@ -18,15 +19,11 @@ mongoose.set('debug', true);
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Welcome to Render Sanjay!');
-})
-
-app.use((req, res, next) => {
-    console.log("HTTP Method - " + req.method + " URL - " + req.url);
-    next();
+    res.send('Welcome to Our Server!');
 })
 
 app.use('/users', userRouter);
+app.use('/notes', notesRouter);
 
 
 const port = process.env.PORT;
